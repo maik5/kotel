@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3 משבצות וידאו</title>
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --card: #121822;
+        --text: #e6edf3;
+        --muted: #9fb3c8;
+        --ring: #3b82f6;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: radial-gradient(1200px 800px at 80% -20%, #182234 0%, var(--bg) 55%);
+      }
+      header {
+        padding: 18px 20px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: clamp(18px, 2.6vw, 28px);
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto;
+        gap: 16px;
+        padding: 16px;
+      }
+      .tile {
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        overflow: hidden;
+        position: relative;
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      }
+      .tile:hover {
+        transform: translateY(-2px);
+        border-color: rgba(59,130,246,0.45);
+        box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+      }
+      .tile-header {
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        background: rgba(0,0,0,0.25);
+        backdrop-filter: blur(6px);
+      }
+      .label {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .frame-wrap {
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        position: relative;
+        background: #0a0f18;
+      }
+      iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 0 0 16px 16px;
+      }
+      .footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        padding: 14px 20px 24px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        setTimeout(function(){
+          $("iframe").each(function(){
+            try {
+              $(this).contents().find(".vg-overlay-play").click();
+            } catch(e) {
+              console.warn("לא ניתן לגשת ל-iframe עקב הגבלות דומיין.");
+            }
+          });
+        }, 5000);
+		
+			const btn = document.getElementById('fullscreenBtn');
+	  
+		  const iframe = document.getElementById('vid4');
+		  
+		  btn.addEventListener('click', () => {
+		  if (iframe.requestFullscreen) {
+			iframe.requestFullscreen();
+		  } else if (iframe.mozRequestFullScreen) { // Firefox
+			iframe.mozRequestFullScreen();
+		  } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+			iframe.webkitRequestFullscreen();
+		  } else if (iframe.msRequestFullscreen) { // IE/Edge
+			iframe.msRequestFullscreen();
+		  } else {
+			alert('הדפדפן שלך לא תומך במצב מסך מלא');
+		  }
+		});
+		
+      });
+	  
+	  
+    </script>
+  </head>
+  <body>
+
+
+    <main class="grid" role="region" aria-label="רשת וידאו">
+      <section class="tile" aria-label="וידאו 1" >
+        <div class="frame-wrap">
+          <iframe src="https://wm.cast-tv.com/player;clid=23595;movId=djkmgg" id="vid1" title="נגן 1" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
+        </div>
+      </section>
+
+    <section class="tile" aria-label="וידאו 1" >
+        <div class="frame-wrap">
+          <iframe src="https://share.earthcam.net/tJ90CoLmq7TzrY396Yd88FszUBQXSsaa2UfVVJUL4rU!.tJ90CoLmq7TzrY396Yd88Oz5cQ2aIzlk7JZQa_rfG-I!/aish_hatorah_western_wall_webcam/western_wall_cam/live" id="vid4" title="נגן 1" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
+		   
+        </div>
+		 <button id="fullscreenBtn">מסך מלא</button>
+      </section>
+
+
+      <section class="tile" aria-label="וידאו 2">
+        <div class="frame-wrap">
+          <iframe src="https://wm.cast-tv.com/player;clid=23595;movId=djkmfd" id="vid2" title="נגן 2" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
+        </div>
+      </section>
+
+      <section class="tile" aria-label="וידאו 3">
+      
+        <div class="frame-wrap">
+          <iframe src="https://wm.cast-tv.com/player;clid=23595;movId=djkmfc" id="vid3" title="נגן 3" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <noscript>כדי להציג את הווידאו יש להפעיל JavaScript בדפדפן.</noscript>
+    </div>
+  </body>
+</html>
